@@ -1,16 +1,14 @@
-const express = require('express');
-const routes = express.Router();
+const { Router } = require('express');
+const authRoutes = require('./auth.routes');
+const activitiesRoutes = require('./activities.routes');
 
-// Note o ".." (dois pontos) para subir uma pasta e achar o controllers
-const AuthController = require('../controllers/AuthController');
+const routes = Router();
 
-// Rotas de Autenticação
-routes.post('/auth/register', AuthController.register);
-routes.post('/auth/login', AuthController.login);
-
-// Rota de Teste
 routes.get('/', (req, res) => {
-    res.send('API Vaggon está on-line!');
+    res.send('API Vaggon está on-line! ');
 });
+
+routes.use('/auth', authRoutes);       
+routes.use('/activities', activitiesRoutes); 
 
 module.exports = routes;
