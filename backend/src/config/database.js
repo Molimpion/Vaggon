@@ -1,5 +1,5 @@
 const { Sequelize } = require('sequelize');
-require('dotenv').config(); // Carrega as variáveis do .env
+require('dotenv').config();
 
 const sequelize = new Sequelize(
     process.env.DB_NAME,
@@ -7,8 +7,15 @@ const sequelize = new Sequelize(
     process.env.DB_PASS,
     {
         host: process.env.DB_HOST,
+        port: process.env.DB_PORT, // Adicionamos a porta aqui
         dialect: 'mysql',
-        timezone: '-03:00', 
+        timezone: '-03:00',
+        dialectOptions: {
+            ssl: {
+                require: true,
+                rejectUnauthorized: false // Necessário para aceitar o SSL da nuvem sem certificado local
+            }
+        }
     }
 );
 

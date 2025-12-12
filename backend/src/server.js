@@ -1,33 +1,33 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const sequelize = require('./config/database');
+const { sequelize } = require('./models'); 
+const routes = require('./routes');       
 
 const app = express();
 
-// Configurações básicas
-app.use(cors()); // Permite que o Front acesse o Back
-app.use(express.json()); // Permite ler JSON no corpo das requisições
+app.use(cors());          
+app.use(express.json());   
 
-// Rota de Teste
-app.get('/', (req, res) => {
-    res.send('API Vaggon está rodando! 🚀');
-});
 
-// Tenta conectar ao banco e inicia o servidor
+app.use(routes);         
+
+
 const startServer = async () => {
     try {
         await sequelize.authenticate();
-        console.log(' Conexão com MySQL estabelecida com sucesso!');
-        
-        // Sincroniza as tabelas (veremos isso no próximo passo)
-        // await sequelize.sync({ force: false }); 
+        console.log('Conexão com Banco de Dados estabelecida!');
+
+        await sequelize.sync({ alter: true });
+        console.log('Tabelas sincronizadas com sucesso!');
 
         const PORT = process.env.PORT || 3000;
         app.listen(PORT, () => {
-            console.log(`Servidor rodando na porta ${PORT}`);
+            console.log(`Servidor rodando em http://localhost:${PORT}`);
         });
+
     } catch (error) {
-        console.error(' Não foi possível conectar ao banco de dados:', error);
+        console.error('Erro fatal ao iniciar o servidor:', error);
     }
 };
 
