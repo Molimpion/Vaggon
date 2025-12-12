@@ -6,7 +6,6 @@ const { activitySchema } = require('../validators/ActivitySchema');
 
 const activitiesRoutes = Router();
 
-// Aplica o guardião em todas as rotas abaixo
 activitiesRoutes.use(authMiddleware);
 
 /**
