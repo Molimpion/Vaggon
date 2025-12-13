@@ -1,0 +1,38 @@
+.wrapper {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f6f8;
+    padding: 20px;
+}
+
+.paper {
+    padding: 32px;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.title {
+    margin-bottom: 24px;
+    font-weight: bold;
+    color: #0D47A1; /* Azul */
+    text-align: center;
+}
+
+.form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.footer {
+    margin-top: 24px;
+    text-align: center;
+}

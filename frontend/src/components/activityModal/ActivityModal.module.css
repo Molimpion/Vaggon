@@ -1,0 +1,12 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 10px;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 24px;
+}

@@ -1,0 +1,15 @@
+.container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.calendarContainer {
+    height: 75vh;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 3px 6px rgba(0,0,0,0.1);
+}

@@ -1,0 +1,41 @@
+.container {
+    margin-top: 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.paper {
+    padding: 32px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    margin-bottom: 16px;
+    font-weight: bold;
+    color: #2e7d32; 
+}
+
+.form {
+    margin-top: 8px;
+    width: 100%;
+}
+
+.submitButton {
+    margin-top: 24px !important;
+    margin-bottom: 16px !important;
+    height: 48px;
+    background-color: #2e7d32 !important; 
+}
+
+.submitButton:hover {
+    background-color: #1b5e20 !important;
+}
+
+.linkContainer {
+    text-align: center;
+    margin-top: 10px;
+}

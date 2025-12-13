@@ -1,19 +1,15 @@
-const { Activity } = require('../models');
-const AppError = require('../utils/AppError');
+const ActivityService = require('../services/ActivityService');
 
 module.exports = {
     async index(req, res) {
-        const activities = await Activity.findAll({
-            where: { user_id: req.userId },
-            order: [['data_inicio', 'ASC']]
-        });
+        const activities = await ActivityService.listActivities(req.userId);
         return res.json(activities);
     },
 
     async store(req, res) {
         const { nome, descricao, data_inicio, data_termino } = req.body;
 
-        const activity = await Activity.create({
+        const activity = await ActivityService.createActivity({
             nome,
             descricao,
             data_inicio,
@@ -28,15 +24,11 @@ module.exports = {
         const { id } = req.params;
         const { nome, descricao, data_inicio, data_termino, status } = req.body;
 
-        const activity = await Activity.findOne({
-            where: { id, user_id: req.userId }
+        const activity = await ActivityService.updateActivity({
+            id, 
+            user_id: req.userId,
+            data: { nome, descricao, data_inicio, data_termino, status }
         });
-
-        if (!activity) {
-            throw new AppError('Atividade não encontrada', 404);
-        }
-
-        await activity.update({ nome, descricao, data_inicio, data_termino, status });
 
         return res.json(activity);
     },
@@ -44,13 +36,10 @@ module.exports = {
     async delete(req, res) {
         const { id } = req.params;
 
-        const rowsDeleted = await Activity.destroy({
-            where: { id, user_id: req.userId }
+        await ActivityService.deleteActivity({ 
+            id, 
+            user_id: req.userId 
         });
-
-        if (rowsDeleted === 0) {
-            throw new AppError('Atividade não encontrada', 404);
-        }
 
         return res.status(204).send();
     }
